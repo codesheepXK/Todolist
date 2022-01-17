@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="vue.js"></script>
+    <link rel="stylesheet" href="todolist.css">
+    <title>Todolist</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        Vue.config.productionTip = false;
+    </script>
+    <div class="page-top">
+        <div class="page-content">
+            <h2>Todolist——天才是百分之一的灵感,加百分之九十九的汗水</h2>
+        </div>
+    </div>
+    <div class="main" id="root">
+        <h2 v-show="unComplete">请注意，你有{{unComplete}}个任务未完成</h2>
+        <h3>添加任务：</h3>
+        <input placeholder="按回车即可添加任务" class="task-input" type="text" v-on:keyup.enter="add" v-model="todo" />
+        <ul class="task-count">
+            <li class="action">
+                <a :class="{active:visibility!=='unCompleted'&&visibility!=='completed'}" href="#all">任务清单</a>
+                <a :class="{active:visibility==='unCompleted'}" href="#unCompleted">未完成</a>
+                <a :class="{active:visibility==='completed'}" href="#completed">已完成</a>
+            </li>
+        </ul>
+        <h3>任务列表：</h3>
+        <div class="tasks">
+            <span class="no-task-tip" v-show="!list.length">还没有添加任何任务</span>
+            <ul class="todo-list" v-show="list.length">
+                <li class="todo" v-for="item in filterData" v-bind:class="{completed:item.isComplete,editing:item===edtorTodos}">
+                    <div class="view">
+                        <input class="toggle" type="checkbox" v-model="item.isComplete" />
+                        <!-- @dblclick相当于v-on:dblclick -->
+                        <!-- 双击编辑事件 -->
+                        <label @dblclick="edtorTodo(item)">{{item.title}}</label>
+                        <button class="destroy" @click="delFn(item)"></button>
+                    </div>
+                    <input class="edit" type="text" v-focus="edtorTodos===item" v-model="item.title" @blur="edtoEnd(item)" @keyup.enter="edtoEnd(item)" @keyup.esc="cancelEdit(item)" />
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript" src="todolist.js"></script>
+</body>
+
+</html>
