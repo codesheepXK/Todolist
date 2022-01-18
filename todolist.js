@@ -30,7 +30,7 @@ var vm = new Vue({
 
     },
     methods: {
-        enterFn(ev) { //添加任务
+        addFn(ev) { //添加任务
             if (this.todo == "") { return; }
             this.list.push({
                 title: this.todo,
