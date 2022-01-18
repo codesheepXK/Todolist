@@ -22,7 +22,7 @@
     <div class="main" id="root">
         <h2 v-show="unComplete">请注意，你有{{unComplete}}个任务未完成</h2>
         <h3>添加任务：</h3>
-        <input placeholder="按回车即可添加任务" class="task-input" type="text" v-on:keyup.enter="add" v-model="todo" />
+        <input placeholder="按回车即可添加任务" class="task-input" type="text" v-on:keyup.enter="addFn" v-model="todo" />
         <ul class="task-count">
             <li class="action">
                 <a :class="{active:visibility!=='unCompleted'&&visibility!=='completed'}" href="#all">任务清单</a>
